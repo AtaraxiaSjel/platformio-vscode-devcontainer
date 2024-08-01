@@ -4,7 +4,7 @@
 		"dockerfile": "Containerfile",
 		"context": ".",
 		"args": {
-			"FEDORA_COMPAT" : "1", // enables fedora compatibility mode (extra dialout group with gid 18)
+			"DIALOUT_GROUP_ID" : "27", // enables host compatibility mode (extra group id for vscode user)
 			"VARIANT": "bookworm"
 		}
 	},
@@ -23,7 +23,9 @@
 		8008
 	],
 	"mounts": [
-		"source=/dev/,target=/dev/,type=bind,consistency=consistent"
+		"source=/dev/,target=/dev/,type=bind,consistency=consistent",
+		"source=${localWorkspaceFolder}/platformio,target=/home/vscode/Documents/PlatformIO,type=bind,consistency=cached",
+		"source=${localWorkspaceFolder}/.platformio,target=/home/vscode/.platformio,type=bind,consistency=cached"
 	],
 	"runArgs": [
 		"--privileged"
